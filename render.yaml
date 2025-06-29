@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: bagisto-app
+    env: docker
+    plan: free
+    region: frankfurt
+    buildCommand: ""
+    startCommand: apache2-foreground
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromService:
+          name: bagisto-db
+          type: pserv
+      - key: DB_DATABASE
+        value: bagisto
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        generateValue: true
+
+  - type: pserv
+    name: bagisto-db
+    env: docker
+    dockerfilePath: ""
+    image: mysql:8.0
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+      - key: MYSQL_DATABASE
+        value: bagisto
