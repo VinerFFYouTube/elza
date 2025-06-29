@@ -30,3 +30,7 @@ yarn.lock
 yarn-error.log
 /test-results
 /playwright-report
+/public/build/
+/storage/logs/
+/storage/app/public/data-transfer/
+
